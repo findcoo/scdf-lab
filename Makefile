@@ -18,7 +18,7 @@ remove: ## spring coud data flow를 제거합니다.
 	kubectl delete all,cm -l app=scdf-server
 
 create_cluster: ## cluster를 런칭합니다.
-	gcloud container clusters create scdf-lab --zone asia-northeast1-a --max-nodes 5 --preemptible
+	gcloud container clusters create scdf-lab --zone asia-northeast1-a --enable-autoscaling --min-nodes 3 --max-nodes 5 --preemptible
 
 delete_cluster: ## cluster를 제거합니다.
 	gcloud container clusters delete scdf-lab --zone asia-northeast1-a 
