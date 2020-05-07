@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: scdf-server
-        image: springcloud/spring-cloud-dataflow-server:2.2.1.RELEASE
+        image: springcloud/spring-cloud-dataflow-server:2.4.2.RELEASE
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -40,6 +40,8 @@ spec:
           value: 'true'
         - name: SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED
           value: 'true'
+        - name: SPRING_CLOUD_DATAFLOW_TASK_SCHEDULER_TASK_LAUNCHER_URL
+          value: 'docker://springcloud/spring-cloud-dataflow-scheduler-task-launcher:2.4.2.RELEASE'
         - name: SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API
           value: 'true'
         - name: SPRING_CLOUD_KUBERNETES_SECRETS_NAME
@@ -53,7 +55,10 @@ spec:
           value: 'http://${SKIPPER_SERVICE_HOST}:${SKIPPER_SERVICE_PORT}/api'
           # Add Maven repo for metadata artifact resolution for all stream apps
         - name: SPRING_APPLICATION_JSON
-          value: "{ \"maven\": { \"local-repository\": null, \"remote-repositories\": { \"repo1\": { \"url\": \"https://repo.spring.io/libs-snapshot\"} } } }"
+          value: "{ \"maven\": { \"local-repository\": null, \"remote-repositories\": { 
+          \"repo1\": { \"url\": \"https://repo.spring.io/libs-snapshot\" },
+          \"repo2\": { \"url\": \"https://jitpack.io\" }
+          } } }"
       initContainers:
       - name: init-mysql-wait
         image: busybox

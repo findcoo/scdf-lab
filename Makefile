@@ -2,6 +2,7 @@ install: ## spring cloud data flow를 런칭합니다.
 	kubectl create -f kubernetes/kafka/
 	kubectl create -f kubernetes/mysql/
 	kubectl create -f kubernetes/prometheus/
+	kubectl create -f kubernetes/prometheus-proxy/
 	kubectl create -f kubernetes/grafana/
 	kubectl create -f kubernetes/skipper/
 	kubectl create -f kubernetes/server/
@@ -10,6 +11,7 @@ remove: ## spring coud data flow를 제거합니다.
 	kubectl delete -f kubernetes/kafka/
 	kubectl delete all,pvc,secrets -l app=mysql
 	kubectl delete -f kubernetes/prometheus/
+	kubectl delete -f kubernetes/prometheus-proxy/
 	kubectl delete all,cm,svc,secrets -l app=grafana
 	kubectl delete role scdf-role
 	kubectl delete rolebinding scdf-rb
